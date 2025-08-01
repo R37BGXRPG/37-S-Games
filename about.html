@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About | 37's Games</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        .main-box {
+            max-width: 600px;
+            margin: 48px auto 0 auto;
+            padding: 24px 8px 24px 8px;
+        }
+        @media (max-width: 700px) {
+            .main-box { max-width: 98vw; padding: 12px 2vw; }
+        }
+        @media (max-width: 480px) {
+            .main-box { padding: 6px 1vw; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">37's Games</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="games.html">Games</a>
+        <a href="contact.html">Contacts</a>
+        <a href="settings.html" class="navbar-settings" title="Theme Settings">
+            <svg viewBox="0 0 24 24" width="22" height="22" style="vertical-align:middle;">
+                <path fill="currentColor"
+                    d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7zm7.43-2.9l1.77-1.03a1 1 0 0 0 .37-1.36l-1.67-2.89a1 1 0 0 0-1.28-.46l-1.77 1.03a7.03 7.03 0 0 0-1.52-.88l-.27-1.97A1 1 0 0 0 13.5 4h-3a1 1 0 0 0-1 .85l-.27 1.97a7.03 7.03 0 0 0-1.52.88l-1.77-1.03a1 1 0 0 0-1.28.46l-1.67 2.89a1 1 0 0 0 .37 1.36l1.77 1.03c-.06.32-.1.65-.1.99s.04.67.1.99l-1.77 1.03a1 1 0 0 0-.37 1.36l1.67 2.89a1 1 0 0 0 1.28.46l1.77-1.03c.47.34.98.63 1.52.88l.27 1.97a1 1 0 0 0 1 .85h3a1 1 0 0 0 1-.85l.27-1.97c.54-.25 1.05-.54 1.52-.88l1.77 1.03a1 1 0 0 0 1.28-.46l1.67-2.89a1 1 0 0 0-.37-1.36l-1.77-1.03c.06-.32.1-.65.1-.99s-.04-.67-.1-.99z" />
+            </svg>
+        </a>
+    </nav>
+    <div class="main-box">
+        <h2>About 37's Games</h2>
+        <p style="font-size:1.15rem;line-height:1.7;color:var(--main-fg);margin-bottom:24px;">
+            Welcome to <b>37's Games</b>!<br>
+            We are passionate about creating fun, accessible, and visually appealing browser games for everyone.<br>
+            Our games are designed with a modern neumorphic aesthetic and customizable themes, so you can play your way.
+        </p>
+        <div style="background:var(--main-bg);border-radius:18px;padding:22px 18px;box-shadow:inset 2px 2px 8px var(--box-shadow1),inset -2px -2px 8px var(--box-shadow2);margin-bottom:24px;">
+            <b>What makes us different?</b>
+            <ul style="text-align:left;max-width:420px;margin:18px auto 0 auto;color:var(--score-color);font-size:1.05rem;">
+                <li>Modern, soft UI with neumorphism</li>
+                <li>Customizable color themes (including neon!)</li>
+                <li>Simple, addictive gameplay</li>
+                <li>No installs, no ads, just play</li>
+            </ul>
+        </div>
+        <p style="font-size:1.08rem;color:var(--main-fg);margin-top:18px;">
+            <b>Contact us:</b> <a href="mailto:contact@37sgames.com" style="color:var(--score-color);text-decoration:underline;">contact@37sgames.com</a>
+        </p>
+    </div>
+    <script src="theme.js"></script>
+    <script>
+        window.themeScope = 'main';
+        initTheme('main');
+    </script>
+</body>
+</html>
