@@ -1,45 +1,52 @@
+
+// Function to get the correct localStorage key for a given scope
 function getThemeKey(scope) {
-    return scope === 'bricks' ? 'bricksTheme' : 'theme';
-}
-function getAccentKey(scope) {
-    return scope === 'bricks' ? 'bricksNeonAccent' : 'neonAccent';
+    return scope + 'Theme';
 }
 
-function setTheme(theme, scope = 'main') {
-    document.documentElement.className = '';
-    document.documentElement.classList.add('theme-' + theme);
-    if (theme === 'neon') {
+function getAccentKey(scope) {
+    return scope + 'NeonAccent';
+}
+
+// Function to set the theme on the <html> element
+function setTheme(themeName, scope) {
+    document.documentElement.setAttribute('data-theme', themeName);
+    localStorage.setItem(getThemeKey(scope), themeName);
+    if (themeName === 'neon') {
+        // Apply neon accent if theme is neon
         const accent = localStorage.getItem(getAccentKey(scope)) || '#39ff14,#232b25';
-        const [color, bg] = accent.split(',');
-        document.documentElement.style.setProperty('--neon-accent', color);
-        document.documentElement.style.setProperty('--neon-bg', bg);
+        setAccentVariables(accent);
     }
 }
 
-function setAccent(accent, scope = 'main') {
+// Helper to set the neon accent CSS variables
+function setAccentVariables(accent) {
     const [color, bg] = accent.split(',');
     document.documentElement.style.setProperty('--neon-accent', color);
     document.documentElement.style.setProperty('--neon-bg', bg);
+}
+
+// Function to set the neon accent and save it to localStorage
+function setAccent(accent, scope) {
+    setAccentVariables(accent);
     localStorage.setItem(getAccentKey(scope), accent);
-    window.dispatchEvent(new Event('storage'));
 }
 
-function initTheme(scope = 'main') {
-    const themeKey = getThemeKey(scope);
-    const accentKey = getAccentKey(scope);
-    const savedTheme = localStorage.getItem(themeKey) || 'night';
+// Function to initialize the theme when a page loads
+function initTheme(scope) {
+    const savedTheme = localStorage.getItem(getThemeKey(scope)) || 'night';
     setTheme(savedTheme, scope);
-    if (savedTheme === 'neon') {
-        const accent = localStorage.getItem(accentKey) || '#39ff14,#232b25';
-        setAccent(accent, scope);
-    }
+    // Note: The accent is now handled by setTheme for consistency
 }
 
-window.addEventListener('storage', function(e) {
-    if ((e.key === 'theme' || e.key === 'neonAccent') && window.themeScope === 'main') {
-        initTheme('main');
-    }
-    if ((e.key === 'bricksTheme' || e.key === 'bricksNeonAccent') && window.themeScope === 'bricks') {
-        initTheme('bricks');
+// Event listener to sync theme changes across tabs
+window.addEventListener('storage', function (e) {
+    // Check if the change is relevant to the current page's scope
+    const themeKey = getThemeKey(window.themeScope);
+    const accentKey = getAccentKey(window.themeScope);
+    if (e.key === themeKey) {
+        setTheme(localStorage.getItem(e.key), window.themeScope);
+    } else if (e.key === accentKey) {
+        setAccent(localStorage.getItem(e.key), window.themeScope);
     }
 });
