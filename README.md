@@ -9,3 +9,9 @@ A few games made by one person
 - First Game added.
 - Theme Support Added
 - Difficulty added
+
+**Version 1.1**
+- A **NEW GAME** added: Snakes Game
+- Theme Support Fixed
+- Game issues fixed
+- Bugs Fixes
