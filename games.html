@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Games</title>
@@ -11,6 +12,7 @@
             margin: 48px auto 0 auto;
             padding: 24px 8px 24px 8px;
         }
+
         .game-btn {
             padding: 16px 32px;
             font-size: 1.1rem;
@@ -24,19 +26,32 @@
             transition: background 0.2s, color 0.2s;
             margin-bottom: 8px;
         }
+
         .game-btn:hover {
             background: var(--score-color);
             color: var(--main-fg);
         }
+
         @media (max-width: 700px) {
-            .main-box { max-width: 98vw; padding: 12px 2vw; }
+            .main-box {
+                max-width: 98vw;
+                padding: 12px 2vw;
+            }
         }
+
         @media (max-width: 480px) {
-            .main-box { padding: 6px 1vw; }
-            .game-btn { width: 100%; font-size: 1rem; }
+            .main-box {
+                padding: 6px 1vw;
+            }
+
+            .game-btn {
+                width: 100%;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <a href="index.html" class="navbar-brand">37's Games</a>
@@ -55,6 +70,7 @@
         <h2>All Games</h2>
         <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;">
             <a href="bricks.html"><button class="game-btn">Bricks Game</button></a>
+            <a href="snake.html"><button class="game-btn">Snake Game</button></a>
             <!-- Add more games here as needed -->
         </div>
     </div>
@@ -64,4 +80,5 @@
         initTheme('main');
     </script>
 </body>
+
 </html>
