@@ -1,46 +1,8 @@
-/* Default variables */
-:root {
-    --neon-accent: #39ff14;
-    --neon-bg: #232b25;
-    --main-bg: #232946;
-    --main-fg: #eebbc3;
-    --box-bg: #393e6e;
-    --box-shadow1: #181b2e;
-    --box-shadow2: #3a3f6e;
-    --slider-thumb: #eebbc3;
-    --slider-thumb-border: #393e6e;
-    --slider-track: #393e6e;
-    --score-color: #39ff14;
-}
+/* --- Core Theme System --- */
 
-/* Theme: Neon */
-.theme-neon {
-    --main-bg: var(--neon-bg, #181f1c);
-    --main-fg: var(--neon-accent, #39ff14);
-    --box-bg: var(--neon-bg, #232b25);
-    --box-shadow1: #0d120f;
-    --box-shadow2: #2e3a2f;
-    --slider-thumb: var(--neon-accent, #39ff14);
-    --slider-thumb-border: var(--neon-bg, #232b25);
-    --slider-track: var(--neon-bg, #232b25);
-    --score-color: var(--neon-accent, #39ff14);
-}
-
-/* Theme: Purple */
-.theme-purple {
-    --main-bg: #f3eaff;
-    --main-fg: #3d1766;
-    --box-bg: #e0d7fa;
-    --box-shadow1: #c3b1e1;
-    --box-shadow2: #f8f6ff;
-    --slider-thumb: #5f27cd;
-    --slider-thumb-border: #e0d7fa;
-    --slider-track: #e0d7fa;
-    --score-color: #5f27cd;
-}
-
-/* Theme: Night */
-.theme-night {
+/* Default variables for the 'night' theme */
+:root,
+[data-theme='night'] {
     --main-bg: #232946;
     --main-fg: #eebbc3;
     --box-bg: #393e6e;
@@ -50,10 +12,51 @@
     --slider-thumb-border: #393e6e;
     --slider-track: #393e6e;
     --score-color: #3fa9f5;
+    /* New game-specific variables */
+    --snake-color: #eebbc3;
+    --snake-head-color: #3fa9f5;
+    --food-color: #ff3c00;
+}
+
+/* Theme: Neon */
+[data-theme='neon'] {
+    /* These variables will be updated by theme.js */
+    --neon-accent: #39ff14;
+    --neon-bg: #232b25;
+    --main-bg: var(--neon-bg);
+    --main-fg: var(--neon-accent);
+    --box-bg: var(--neon-bg);
+    --box-shadow1: #0d120f;
+    --box-shadow2: #2e3a2f;
+    --slider-thumb: var(--neon-accent);
+    --slider-thumb-border: var(--neon-bg);
+    --slider-track: var(--neon-bg);
+    --score-color: var(--neon-accent);
+    /* Game-specific variables for neon */
+    --snake-color: var(--neon-accent);
+    --snake-head-color: #f7ff3b;
+    --food-color: #ff3c00;
+}
+
+/* Theme: Purple */
+[data-theme='purple'] {
+    --main-bg: #f3eaff;
+    --main-fg: #3d1766;
+    --box-bg: #e0d7fa;
+    --box-shadow1: #c3b1e1;
+    --box-shadow2: #f8f6ff;
+    --slider-thumb: #5f27cd;
+    --slider-thumb-border: #e0d7fa;
+    --slider-track: #e0d7fa;
+    --score-color: #5f27cd;
+    /* Game-specific variables for purple */
+    --snake-color: #a453ff;
+    --snake-head-color: #5f27cd;
+    --food-color: #ff5277;
 }
 
 /* Theme: Dark */
-.theme-dark {
+[data-theme='dark'] {
     --main-bg: #23272f;
     --main-fg: #f4f4f4;
     --box-bg: #2d313a;
@@ -63,10 +66,14 @@
     --slider-thumb-border: #2d313a;
     --slider-track: #2d313a;
     --score-color: #f4f4f4;
+    /* Game-specific variables for dark */
+    --snake-color: #f4f4f4;
+    --snake-head-color: #8be9fd;
+    --food-color: #ff5555;
 }
 
 /* Theme: Light */
-.theme-light {
+[data-theme='light'] {
     --main-bg: #f7f8fa;
     --main-fg: #333;
     --box-bg: #ffffff;
@@ -76,9 +83,14 @@
     --slider-thumb-border: #ffffff;
     --slider-track: #ffffff;
     --score-color: #1976d2;
+    /* Game-specific variables for light */
+    --snake-color: #333;
+    --snake-head-color: #1976d2;
+    --food-color: #f57f17;
 }
 
-/* General styles using variables */
+/* --- General Styles using Variables (No Change) --- */
+
 body {
     background: var(--main-bg);
     color: var(--main-fg);
@@ -219,7 +231,7 @@ input[type=range]::-ms-fill-upper {
     display: block;
     text-align: center;
     margin-top: 18px;
-    color: #3fa9f5;
+    color: var(--score-color);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
