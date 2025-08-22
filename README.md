@@ -15,3 +15,11 @@ A few games made by one person
 - Theme Support Fixed
 - Game issues fixed
 - Bugs Fixes
+
+ **Version 1.1.1**
+ - Easter egg added to one of the games.
+ - Bug Fixes
+
+**Version 1.2**
+- NEW GAME ADDED
+- Bug fixes
