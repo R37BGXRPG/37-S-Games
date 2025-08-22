@@ -23,3 +23,4 @@ A few games made by one person
 **Version 1.2**
 - NEW GAME ADDED
 - Bug fixes
+- Older game fixes
