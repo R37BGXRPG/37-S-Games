@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roulette Game Settings</title>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+    <div class="settings-box">
+        <h2>Roulette Game Settings</h2>
+        <label for="themeSelect">Choose a theme:</label>
+        <select id="themeSelect">
+            <option value="purple">Purple Theme</option>
+            <option value="night">Night Theme</option>
+            <option value="neon">Neon Theme</option>
+            <option value="dark">Dark Theme</option>
+            <option value="light">Light Theme</option>
+        </select>
+        <div id="accentSelectWrapper">
+            <label for="accentSelect">Neon Accent Color:</label>
+            <select id="accentSelect">
+                <option value="#39ff14,#232b25">Green (Default)</option>
+                <option value="#00eaff,#1a2a2f">Cyan</option>
+                <option value="#ff00ea,#2a1a2f">Pink</option>
+                <option value="#ffe600,#2a2a1a">Yellow</option>
+                <option value="#ff3c00,#2a1a1a">Orange</option>
+            </select>
+        </div>
+        <a href="thewebroulette.html" class="back-link">← Back to Roulette Game</a>
+    </div>
+    <script src="theme.js"></script>
+    <script>
+        window.themeScope = 'roulette';
+        initTheme('roulette');
+        const themeSelect = document.getElementById('themeSelect');
+        const accentSelect = document.getElementById('accentSelect');
+        const accentWrapper = document.getElementById('accentSelectWrapper');
+        const themeKey = 'rouletteTheme';
+        const accentKey = 'rouletteNeonAccent';
+        const savedTheme = localStorage.getItem(themeKey) || 'night';
+        themeSelect.value = savedTheme;
+        accentWrapper.style.display = (savedTheme === 'neon') ? 'block' : 'none';
+        if (savedTheme === 'neon') {
+            accentSelect.value = localStorage.getItem(accentKey) || '#39ff14,#232b25';
+        }
+        themeSelect.addEventListener('change', function() {
+            localStorage.setItem(themeKey, this.value);
+            setTheme(this.value, 'roulette');
+            accentWrapper.style.display = (this.value === 'neon') ? 'block' : 'none';
+            if (this.value === 'neon') {
+                setAccent(accentSelect.value, 'roulette');
+            }
+        });
+        accentSelect.addEventListener('change', function() {
+            setAccent(this.value, 'roulette');
+        });
+    </script>
+</body>
+</html>

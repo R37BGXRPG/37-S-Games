@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Russian Roulette</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        .main-box {
+            max-width: 500px;
+            margin: 48px auto 0 auto;
+            padding: 24px 8px 24px 8px;
+            background: var(--box-bg, #fff);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px var(--box-shadow1, rgba(0,0,0,0.12));
+            position: relative;
+        }
+        .roulette-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--main-text, #222);
+            letter-spacing: 1px;
+        }
+        .roulette-desc {
+            font-size: 1em;
+            color: var(--sub-text, #555);
+            margin-bottom: 30px;
+        }
+        .roulette-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .link-btn {
+            display: inline-block;
+            min-width: 110px;
+            margin: 0;
+            padding: 16px 0;
+            font-size: 1em;
+            background: var(--btn-bg, #eee);
+            border: 2px solid var(--btn-border, #333);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            text-decoration: none;
+            color: var(--btn-text, #333);
+            text-align: center;
+        }
+        .link-btn:hover {
+            background: var(--btn-hover, #ddd);
+        }
+        #lose-message {
+            display: none;
+            font-size: 2em;
+            color: #e53935;
+            margin-top: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background: var(--navbar-bg);
+            padding: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .navbar a {
+            color: var(--main-fg);
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            padding: 0 12px;
+            line-height: 56px;
+            transition: color 0.2s;
+            display: inline-block;
+        }
+        .navbar a.navbar-brand {
+            color: var(--navbar-brand);
+            font-size: 1.3em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding-left: 18px;
+            padding-right: 24px;
+        }
+        .navbar a.navbar-settings {
+            margin-left: auto;
+            padding-right: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar a:hover {
+            color: var(--score-color);
+        }
+        .navbar-settings svg {
+            vertical-align: middle;
+            fill: var(--score-color);
+        }
+        /* Settings icon in box */
+        .settings-icon {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 38px;
+            height: 38px;
+            background: var(--box-bg, #fff);
+            border-radius: 50%;
+            box-shadow: 2px 2px 8px var(--box-shadow1), -2px -2px 8px var(--box-shadow2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        .settings-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--score-color, #232946);
+        }
+        .settings-icon:hover {
+            background: var(--btn-hover, #eee);
+        }
+        @media (max-width: 600px) {
+            .main-box {
+                max-width: 98vw;
+                padding: 12px 2vw;
+            }
+            .settings-icon {
+                top: 8px;
+                right: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">37's Games</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="games.html">Games</a>
+        <a href="contact.html">Contacts</a>
+        <a href="settings.html" class="navbar-settings" title="Theme Settings">
+            <svg viewBox="0 0 24 24" width="22" height="22" style="vertical-align:middle;">
+                <path fill="currentColor"
+                    d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7zm7.43-2.9l1.77-1.03a1 1 0 0 0 .37-1.36l-1.67-2.89a1 1 0 0 0-1.28-.46l-1.77 1.03a7.03 7.03 0 0 0-1.52-.88l-.27-1.97A1 1 0 0 0 13.5 4h-3a1 1 0 0 0-1 .85l-.27 1.97a7.03 7.03 0 0 0-1.52.88l-1.77-1.03a1 1 0 0 0-1.28.46l-1.67 2.89a1 1 0 0 0 .37 1.36l1.77 1.03c-.06.32-.1.65-.1.99s.04.67.1.99l-1.77 1.03a1 1 0 0 0-.37 1.36l1.67 2.89a1 1 0 0 0 1.28.46l1.77-1.03c.47.34.98.63 1.52.88l.27 1.97a1 1 0 0 0 1 .85h3a1 1 0 0 0 1-.85l.27-1.97c.54-.25 1.05-.54 1.52-.88l1.77 1.03a1 1 0 0 0 1.28-.46l1.67-2.89a1 1 0 0 0-.37-1.36l-1.77-1.03c.06-.32.1-.65.1-.99s-.04-.67-.1-.99z" />
+            </svg>
+        </a>
+    </nav>
+    <div class="main-box">
+        <div class="settings-icon" onclick="location.href='thewebroulettesettings.html'" title="Settings">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7zm7.43-2.9l1.77-1.03a1 1 0 0 0 .37-1.36l-1.67-2.89a1 1 0 0 0-1.28-.46l-1.77 1.03a7.03 7.03 0 0 0-1.52-.88l-.27-1.97A1 1 0 0 0 13.5 4h-3a1 1 0 0 0-1 .85l-.27 1.97a7.03 7.03 0 0 0-1.52.88l-1.77-1.03a1 1 0 0 0-1.28.46l-1.67 2.89a1 1 0 0 0 .37 1.36l1.77 1.03c-.06.32-.1.65-.1.99s.04.67.1.99l-1.77 1.03a1 1 0 0 0-.37 1.36l1.67 2.89a1 1 0 0 0 1.28.46l1.77-1.03c.47.34.98.63 1.52.88l.27 1.97a1 1 0 0 0 1 .85h3a1 1 0 0 0 1-.85l.27-1.97c.54-.25 1.05-.54 1.52-.88l1.77 1.03a1 1 0 0 0 1.28-.46l1.67-2.89a1 1 0 0 0-.37-1.36l-1.77-1.03c.06-.32.1-.65.1-.99s-.04-.67-.1-.99z" />
+            </svg>
+        </div>
+        <h2>Web Russian Roulette</h2>
+        <div class="roulette-desc">Pick one chamber. One will Rickroll you, one will play a song, the rest are safe!</div>
+        <div class="roulette-links" id="links"></div>
+        <div id="lose-message">YOU LOSE</div>
+        <!-- Removed <audio id="musicPlayer" src="music/chamber.mp3"></audio> -->
+    </div>
+    <script src="theme.js"></script>
+    <script>
+        window.themeScope = 'roulette';
+        initTheme('roulette');
+
+        // Force navbar and text to use roulette theme variables
+        function applyRouletteThemeVars() {
+            const root = document.body;
+            const nav = document.querySelector('.navbar');
+            if (!nav) return;
+            nav.style.background = getComputedStyle(root).getPropertyValue('--navbar-bg');
+            nav.style.color = getComputedStyle(root).getPropertyValue('--main-fg');
+            nav.querySelectorAll('a').forEach(a => {
+                if (a.classList.contains('navbar-brand')) {
+                    a.style.color = getComputedStyle(root).getPropertyValue('--navbar-brand');
+                } else {
+                    a.style.color = getComputedStyle(root).getPropertyValue('--main-fg');
+                }
+            });
+        }
+        applyRouletteThemeVars();
+        window.addEventListener('storage', applyRouletteThemeVars);
+
+        // --- GAME LOGIC ---
+        const numLinks = 9; // Number of chambers
+        let rickroll = Math.floor(Math.random() * numLinks);
+        let music = Math.floor(Math.random() * numLinks);
+        while (music === rickroll) {
+            music = Math.floor(Math.random() * numLinks);
+        }
+        const rickrollUrl = "https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1&pp=ygUIcmlja3JvbGygBwE%3D";
+        const musicUrl = "https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1&pp=ygUIcmlja3JvbGygBwE%3D"; // Example: Sia - Chandelier
+        const linksDiv = document.getElementById('links');
+        const loseMessage = document.getElementById('lose-message');
+
+        function showLose() {
+            loseMessage.style.display = "block";
+        }
+
+        for (let i = 0; i < numLinks; i++) {
+            const btn = document.createElement('a');
+            btn.className = 'link-btn';
+            btn.textContent = `Chamber ${i + 1}`;
+            btn.href = "#";
+            btn.onclick = function (e) {
+                e.preventDefault();
+                if (i === rickroll) {
+                    showLose();
+                    setTimeout(() => {
+                        window.location.href = rickrollUrl;
+                    }, 1200);
+                } else if (i === music) {
+                    btn.textContent = "🎵 Music Link!";
+                    btn.href = musicUrl;
+                    btn.target = "_blank";
+                    btn.style.background = "#b6d4ff";
+                    showLose();
+                } else {
+                    btn.textContent = "Click again?";
+                    btn.style.background = "#b6ffb6";
+                }
+            };
+            linksDiv.appendChild(btn);
+        }
+    </script>
+</body>
+</html>
